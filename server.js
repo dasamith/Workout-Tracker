@@ -7,6 +7,12 @@ const port = 3000
 app.use(express.static('public'))
 var path = require('path')
 
+var bodyParser = require('body-parser')
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}));
+
 var workoutmodel = require("./models/workout")
 
 mongoose.connect("mongodb://localhost/workout", {
@@ -28,8 +34,21 @@ app.post('/api/workouts', function (req, res) {
     workoutmodel.create({}).then(function (newWorkoutWeMade) {
         res.json(newWorkoutWeMade)
     })
+})
+
+app.put('/api/workouts/:id', function (req, res) {
+
+    console.log("we hit the PUT route", req.params)
+    console.log('add this exercies', req.body)
+    // workoutmodel.create({}).then(function (newWorkoutWeMade) {
+    //     res.json(newWorkoutWeMade)
+    // })
+
 
 })
+
+
+
 
 
 
