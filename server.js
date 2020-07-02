@@ -2,7 +2,8 @@ const express = require('express')
 let mongoose = require("mongoose");
 
 var app = express()
-const port = 3000
+
+const port = proces.env.PORT || 3000
 
 app.use(express.static('public'))
 var path = require('path')
